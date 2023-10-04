@@ -1,0 +1,27 @@
+header {
+  background-color: #b9b9b9;
+  color: black;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+:root {
+  --midgrey: #b9b9b9;
+  -lightgrey: #d1d1d1;
+}
