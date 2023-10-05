@@ -11,3 +11,7 @@
   --midgrey: #b9b9b9;
   -lightgrey: #d1d1d1;
 }
+
+body {
+  background-color: #d1d1d1;
+}

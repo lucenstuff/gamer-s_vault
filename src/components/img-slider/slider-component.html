@@ -1,17 +1,114 @@
 <head>
-  <link rel="stylesheet" href="/styles/slider.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImgSlider</title>
+  <link rel="stylesheet" href="styles/slider.css" />
 </head>
-<div class="slider-wrapper">
-  <div class="slider">
-    <img id="slide-1" src="https://placehold.co/600x400" alt="Img1" />
-    <img id="slide-2" src="https://placehold.co/600x400" alt="Img2" />
-    <img id="slide-3" src="https://placehold.co/600x400" alt="Img3" />
-    <img id="slide-4" src="https://placehold.co/600x400" alt="img4" />
+<div class="slider-container">
+  <div class="img-slider">
+    <div class="slide">
+      <img src="/assets/images/banner/baldurs3_banner.jpg" alt="img-1" />
+    </div>
+    <div class="slide">
+      <img src="/assets/images/banner/cs2_banner.jpg" alt="img-2" />
+    </div>
+    <div class="slide">
+      <img src="/assets/images/banner/diablo4_banner.jpg" alt="img-3" />
+    </div>
+    <div class="slide">
+      <img
+        src="/assets/images/banner/cyberpunk2077phtmlib_banner.png"
+        alt="img-4"
+      />
+      <div class="dotsContainer">
+        <div class="dot active" attr="0" onclick="switchImage(this)"></div>
+        <div class="dot" attr="1" onclick="switchImage(this)"></div>
+        <div class="dot" attr="2" onclick="switchImage(this)"></div>
+        <div class="dot" attr="3" onclick="switchImage(this)"></div>
+        <div class="dot" attr="4" onclick="switchImage(this)"></div>
+      </div>
+    </div>
   </div>
-  <div class="slider-nav">
-    <a href="#slide-1"></a>
-    <a href="#slide-2"></a>
-    <a href="#slide-3"></a>
-    <a href="#slide-4"></a>
-  </div>
+  <script type="text/javascript">
+    // Access the Images
+    let slideImages = document.querySelectorAll("img");
+    // Access the next and prev buttons
+    let next = document.querySelector(".next");
+    let prev = document.querySelector(".prev");
+    // Access the indicators
+    let dots = document.querySelectorAll(".dot");
+
+    var counter = 0;
+
+    // Code for next button
+    next.addEventListener("click", slideNext);
+    function slideNext() {
+      slideImages[counter].style.animation = "next1 0.5s ease-in forwards";
+      if (counter >= slideImages.length - 1) {
+        counter = 0;
+      } else {
+        counter++;
+      }
+      slideImages[counter].style.animation = "next2 0.5s ease-in forwards";
+      indicators();
+    }
+
+    // Code for prev button
+    prev.addEventListener("click", slidePrev);
+    function slidePrev() {
+      slideImages[counter].style.animation = "prev1 0.5s ease-in forwards";
+      if (counter == 0) {
+        counter = slideImages.length - 1;
+      } else {
+        counter--;
+      }
+      slideImages[counter].style.animation = "prev2 0.5s ease-in forwards";
+      indicators();
+    }
+
+    // Auto slideing
+    function autoSliding() {
+      deletInterval = setInterval(timer, 3000);
+      function timer() {
+        slideNext();
+        indicators();
+      }
+    }
+    autoSliding();
+
+    // Stop auto sliding when mouse is over
+    const container = document.querySelector(".slide-container");
+    container.addEventListener("mouseover", function () {
+      clearInterval(deletInterval);
+    });
+
+    // Resume sliding when mouse is out
+    container.addEventListener("mouseout", autoSliding);
+
+    // Add and remove active class from the indicators
+    function indicators() {
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      dots[counter].className += " active";
+    }
+
+    // Add click event to the indicator
+    function switchImage(currentImage) {
+      currentImage.classList.add("active");
+      var imageId = currentImage.getAttribute("attr");
+      if (imageId > counter) {
+        slideImages[counter].style.animation = "next1 0.5s ease-in forwards";
+        counter = imageId;
+        slideImages[counter].style.animation = "next2 0.5s ease-in forwards";
+      } else if (imageId == counter) {
+        return;
+      } else {
+        slideImages[counter].style.animation = "prev1 0.5s ease-in forwards";
+        counter = imageId;
+        slideImages[counter].style.animation = "prev2 0.5s ease-in forwards";
+      }
+      indicators();
+    }
+  </script>
 </div>
