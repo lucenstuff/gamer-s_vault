@@ -1,27 +1,118 @@
-header {
-  background-color: #b9b9b9;
-  color: black;
-  padding: 10px 0;
-  text-align: center;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,800;1,100&display=swap");
 
-nav ul {
+* {
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
 }
 
-nav li {
-  display: inline;
-  margin-right: 20px;
+.header {
+  background-color: #b9b9b9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 5px 5%;
 }
 
-nav a {
-  text-decoration: none;
-  color: black;
+.header .logo {
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+.header .logo img {
+  height: 75px;
+}
+
+.header .nav-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .nav-links a {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
+  text-decoration: none;
+  color: inherit;
 }
 
-:root {
-  --midgrey: #b9b9b9;
-  -lightgrey: #d1d1d1;
+.header .nav-icons li {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.header .nav-icons a {
+  text-decoration: none;
+  color: #363636;
+  font-size: 1px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24;
+  font-size: 10%;
+}
+
+/* Burger Menu Styling */
+
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.burger-line {
+  width: 26px;
+  height: 3px;
+  background-color: #363636;
+  margin: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  .burger-menu {
+    display: flex;
+    padding-bottom: 4px;
+  }
+
+  .burger-menu.active {
+    padding-bottom: 10px;
+  }
+
+  .burger-menu.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-menu.active .burger-line:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+  .burger-menu.active .burger-line:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #b9b9b9;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .nav-links.active {
+    display: flex;
+    align-items: start;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .nav-links li {
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .nav-links a {
+    font-size: 20px;
+    color: #363636;
+    text-decoration: none;
+  }
 }
