@@ -20,11 +20,14 @@ class SliderComponent extends HTMLElement {
       const dotsContainer = document.querySelector('.dotsContainer');
       const dots = dotsContainer.querySelectorAll('.dot');
 
+      let nIntervId;
       let slideIndex = 0;
 
       function switchImage(index) {
         slideIndex = index;
+        clearInterval(nIntervId);
         updateSlider();
+        autoSlide();
       }
 
       function updateSlider() {
@@ -48,13 +51,15 @@ class SliderComponent extends HTMLElement {
         imgSlider.style.transition = 'transform 0.5s ease-in-out'; 
         imgSlider.style.transform = `translateX(${translateXValue}%)`;
       }
+      
 
       function autoSlide() {
-        setInterval(() => {
+        nIntervId=setInterval(() => {
           slideIndex = (slideIndex + 1) % slides.length;
           updateSlider();
         }, 5000);
         updateSlider();
+        console.log(nIntervId)
       }
 
       dots.forEach((dot, index) => {
@@ -63,7 +68,7 @@ class SliderComponent extends HTMLElement {
         };
       });
 
-      // Iniciar la rotación automática
+
       autoSlide();
     } catch (error) {
       console.error('Error:', error);

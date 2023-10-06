@@ -2,7 +2,8 @@
   position: relative;
   width: 100%;
   display: flex;
-  overflow: hidden; /* Evita que las imágenes se desborden del contenedor */
+  overflow: hidden;
+  margin-top: 1.5rem;
 }
 
 .img-slider {
@@ -50,5 +51,11 @@
     height: 10px;
     margin: 0px 2px;
     border: 2px solid #b9b9b9;
+  }
+
+  .img-slider .slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 }
