@@ -3,7 +3,7 @@ class FeaturedComponent extends HTMLElement {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     fetch('src/components/featured-games/featured-component.html')
       .then(response => response.text())
       .then(content => {

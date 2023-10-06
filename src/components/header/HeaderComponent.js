@@ -3,7 +3,7 @@ class HeaderComponent extends HTMLElement {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     fetch('src/components/header/header-component.html')
       .then(response => response.text())
       .then(content => {
