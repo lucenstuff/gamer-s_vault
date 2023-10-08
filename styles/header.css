@@ -67,7 +67,7 @@
   margin: 2px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 890px) {
   .burger-menu {
     display: flex;
     padding-bottom: 4px;
