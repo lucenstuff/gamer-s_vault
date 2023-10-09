@@ -26,6 +26,11 @@
   margin: 0 10px;
 }
 
+.footer li img {
+  width: 25px;
+  height: auto;
+}
+
 .footer a {
   text-decoration: none;
   color: black;

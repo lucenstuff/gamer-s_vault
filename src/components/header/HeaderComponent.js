@@ -10,6 +10,13 @@ class HeaderComponent extends HTMLElement {
         this.innerHTML = content;
 
         const burgerMenu = this.querySelector(".burger-menu");
+        const searchIcon = this.querySelector(".search-toggle");
+        
+        searchIcon.addEventListener
+
+        searchIcon.addEventListener("click", () => {
+          this.toggleSearch();
+        });
 
         burgerMenu.addEventListener("click", () => {
           this.toggleMenu();
@@ -20,14 +27,29 @@ class HeaderComponent extends HTMLElement {
       });
   }
 
-  toggleMenu() {
+   toggleMenu() {
     const navMenu = this.querySelector(".nav-links");
+    const burgerMenuIcon = this.querySelector(".burger-menu i")
 
     navMenu.classList.toggle("active");
 
-    const burgerMenuIcon = this.querySelector(".burger-menu");
     burgerMenuIcon.classList.toggle("active");
+    if (navMenu.classList.contains("active")) {
+      burgerMenuIcon.textContent = "close";
+    } else {
+      burgerMenuIcon.textContent = "menu";
+    }
   }
+
+  toggleSearch(){
+    const searchBar = this.querySelector(".search-bar");
+    const navMenu = this.querySelector(".nav-links");
+    searchBar.classList.toggle("active");
+    navMenu.classList.toggle("active");
+  }
+
 }
 
+
 window.customElements.define('header-component', HeaderComponent);
+
