@@ -33,7 +33,7 @@
   font-weight: 600;
   font-size: 20px;
   text-decoration: none;
-  color: inherit;
+  color: black;
 }
 
 .header .nav-icons li {
@@ -42,6 +42,7 @@
 }
 
 .header .nav-icons a {
+  padding-top: 0.5rem;
   text-decoration: none;
   color: #363636;
   font-size: 1px;
@@ -49,7 +50,7 @@
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
 /* Burger Menu Styling */

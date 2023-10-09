@@ -1,4 +1,30 @@
-.sales-container h2 {
+.title h2 {
   display: flex;
   justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.sales-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.card-gallery {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 890px) {
+  .card-gallery {
+    flex-direction: column;
+  }
+  .sales-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }

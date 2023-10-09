@@ -14,5 +14,5 @@
 
 body {
   background-color: #d1d1d1;
-  height: 5000px;
+  min-height: 100vh;
 }
