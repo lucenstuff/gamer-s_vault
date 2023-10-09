@@ -1,7 +1,7 @@
 .product-card {
   background-color: #d1d1d1;
   text-align: left;
-  max-width: 21rem;
+  max-width: 100%;
   width: 100%;
   padding-bottom: 1rem;
 }
@@ -11,8 +11,29 @@
   height: auto;
 }
 
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-buttons a img {
+  filter: invert(17%) sepia(25%) saturate(0%) hue-rotate(115deg)
+    brightness(101%) contrast(89%);
+}
+
 .product-card .price {
   font-size: 15px;
   color: black;
   margin: 10px 0;
+}
+
+@media screen and (max-width: 890px) {
+  .product-card {
+    max-width: 19rem;
+  }
 }
