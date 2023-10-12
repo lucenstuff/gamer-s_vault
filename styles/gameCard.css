@@ -11,6 +11,22 @@
   height: auto;
 }
 
+.card-buttons .material-icons {
+  color: #363636;
+  font-size: 1.5rem;
+}
+
+.material-icons:hover {
+  color: black;
+}
+
+.card-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.25rem;
+}
+
 .card-bottom {
   display: flex;
   justify-content: space-between;

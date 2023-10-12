@@ -46,7 +46,25 @@ class HeaderComponent extends HTMLElement {
     const navMenu = this.querySelector(".nav-links");
     searchBar.classList.toggle("active");
     navMenu.classList.toggle("active");
+
+}
+
+  
+
+  toggleSearch(){
+    if (window.matchMedia("(max-width: 890px)").matches) {
+    const hideLogo = this.querySelector(".logo");
+    const searchBar = this.querySelector(".search-bar");
+    searchBar.classList.toggle("active");
+    hideLogo.classList.toggle("active");
   }
+  else{
+    const searchBar = this.querySelector(".search-bar");
+    const navMenu = this.querySelector(".nav-links");
+    searchBar.classList.toggle("active");
+    navMenu.classList.toggle("active");
+  }
+}
 
 }
 
