@@ -1,3 +1,5 @@
+
+
 class LoginComponent extends HTMLElement {
   constructor() {
     super();
@@ -15,4 +17,7 @@ class LoginComponent extends HTMLElement {
   }
 }
 
+
+
 window.customElements.define("login-component", LoginComponent);
+

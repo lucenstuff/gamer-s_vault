@@ -12,7 +12,6 @@ class HeaderComponent extends HTMLElement {
         const burgerMenu = this.querySelector(".burger-menu");
         const searchIcon = this.querySelector(".search-toggle");
         
-        searchIcon.addEventListener
 
         searchIcon.addEventListener("click", () => {
           this.toggleSearch();
@@ -21,10 +20,16 @@ class HeaderComponent extends HTMLElement {
         burgerMenu.addEventListener("click", () => {
           this.toggleMenu();
         });
+
+
       })
+      
       .catch(error => {
         console.error('Error al cargar el archivo HTML:', error);
       });
+      
+      
+
   }
 
    toggleMenu() {
@@ -49,8 +54,6 @@ class HeaderComponent extends HTMLElement {
 
 }
 
-  
-
   toggleSearch(){
     if (window.matchMedia("(max-width: 890px)").matches) {
     const hideLogo = this.querySelector(".logo");
@@ -68,6 +71,9 @@ class HeaderComponent extends HTMLElement {
 
 }
 
-
 window.customElements.define('header-component', HeaderComponent);
+
+
+
+
 
