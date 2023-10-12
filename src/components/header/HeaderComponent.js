@@ -11,9 +11,7 @@ class HeaderComponent extends HTMLElement {
 
         const burgerMenu = this.querySelector(".burger-menu");
         const searchIcon = this.querySelector(".search-toggle");
-        const LoginComponent = document.getElementsByClassName(".form")
-        console.log(LoginComponent)
-        
+
         searchIcon.addEventListener("click", () => {
           this.toggleSearch();
         });
@@ -28,7 +26,6 @@ class HeaderComponent extends HTMLElement {
         console.error('Error al cargar el archivo HTML:', error);
       });
       
-
   }
 
    toggleMenu() {

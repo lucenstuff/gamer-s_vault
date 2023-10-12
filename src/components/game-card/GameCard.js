@@ -3,7 +3,7 @@ class GameCard extends HTMLElement {
     super();
   }
 
-  async connectedCallback() {
+   connectedCallback() {
     fetch('src/components/game-card/game-card.html')
       .then(response => response.text())
       .then(content => {

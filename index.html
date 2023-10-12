@@ -8,7 +8,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamer's Vault</title>
-    <script src="script.js"></script>
     <script src="src/components/header/HeaderComponent.js"></script>
     <script src="src/components/img-slider/SliderComponent.js"></script>
     <script src="src/components/featured-games/FeaturedComponent.js"></script>
@@ -18,12 +17,14 @@
     <script src="src/components/Login/LoginComponent.js"></script>
   </head>
   <body id="host">
+    <slider-component></slider-component>
     <header-component></header-component>
     <section>
-      <slider-component></slider-component>
+      <login-component></login-component>
       <featured-component></featured-component>
       <sale-component></sale-component>
       <footer-component></footer-component>
     </section>
   </body>
+  <script src="scripts/LoginConnection.js"></script>
 </html>

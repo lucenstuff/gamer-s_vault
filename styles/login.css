@@ -3,21 +3,22 @@
   font-size: 1.5rem;
 }
 .form {
-  z-index: 10;
+  z-index: 5;
   position: absolute;
   right: 1vw;
-  padding-top: 4rem;
-  /* display: none; */
+  top: 6rem;
+  display: none;
 }
 
-/* .form.active {
+.form.active {
   display: inline;
-} */
+}
 
 .login-form {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  width: 20rem;
-  height: 60vh;
+  min-width: 26rem;
+  min-height: 70vh;
+
   background-color: #d1d1d1;
   display: flex;
   flex-direction: column;
@@ -42,21 +43,6 @@
   font-size: 1rem;
   background-color: #e6e6e6;
 }
-
-.division-line-1 {
-  width: 80%;
-  height: 4.5rem;
-  border-bottom: 1px solid #363636;
-  position: absolute;
-}
-
-.division-line-2 {
-  width: 80%;
-  height: 3rem;
-  border-bottom: 1px solid #363636;
-  position: absolute;
-}
-
 .login input {
   min-width: 87%;
   margin: 5px;
@@ -67,7 +53,7 @@
 }
 .login input {
   background-color: #d1d1d1;
-  color: #fff;
+  color: black;
   letter-spacing: 1px;
   /*INTENTO FALLIDO DE ICONO*/
   /* background-image: url(assets/images/icons/person.png);
@@ -103,9 +89,25 @@
 }
 
 .register-container {
-  padding-top: 25%;
+  padding-top: 5rem;
 }
 
 .register-container h4 {
   font-weight: 400;
+}
+
+@media screen and (max-width: 890px) {
+  .form {
+    right: 0vw;
+    top: 5rem;
+  }
+
+  .login-form {
+    min-width: 100vw;
+    min-height: 70vh;
+    background-color: #d1d1d1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
