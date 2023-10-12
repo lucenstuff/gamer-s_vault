@@ -3,7 +3,7 @@ class HeaderComponent extends HTMLElement {
     super();
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     fetch('src/components/header/header-component.html')
       .then(response => response.text())
       .then(content => {
@@ -11,8 +11,9 @@ class HeaderComponent extends HTMLElement {
 
         const burgerMenu = this.querySelector(".burger-menu");
         const searchIcon = this.querySelector(".search-toggle");
+        const LoginComponent = document.getElementsByClassName(".form")
+        console.log(LoginComponent)
         
-
         searchIcon.addEventListener("click", () => {
           this.toggleSearch();
         });
@@ -21,13 +22,11 @@ class HeaderComponent extends HTMLElement {
           this.toggleMenu();
         });
 
-
       })
-      
+
       .catch(error => {
         console.error('Error al cargar el archivo HTML:', error);
       });
-      
       
 
   }
