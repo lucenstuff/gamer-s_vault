@@ -4,19 +4,22 @@
 }
 .form {
   z-index: 5;
-  position: absolute;
-  right: 1vw;
-  top: 6rem;
-  display: none;
   position: fixed;
+  right: 1vw;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.form.active {
+  transform: translateY(12%);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .form p {
   font-weight: 300;
-}
-
-.form.active {
-  display: inline;
 }
 
 .division-bar {
@@ -31,7 +34,6 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   min-width: 26rem;
   min-height: 70vh;
-
   background-color: #d1d1d1;
   display: flex;
   flex-direction: column;
@@ -48,7 +50,7 @@
   width: 85%;
 }
 .login button {
-  margin: 5px;
+  margin-top: 2rem;
   padding: 0.5rem 1rem;
   border: none;
   outline: none;
@@ -102,6 +104,7 @@
 
 .register-container {
   padding-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .register-container h4 {
@@ -111,7 +114,7 @@
 @media screen and (max-width: 890px) {
   .form {
     right: 0vw;
-    top: 5rem;
+    top: 0rem;
   }
 
   .login-form {
