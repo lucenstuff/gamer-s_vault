@@ -2,8 +2,7 @@ class LoginComponent extends HTMLElement {
   constructor() {
     super();
   }
-
-  async connectedCallback() {
+  connectedCallback() {
     fetch("src/components/Login/login-component.html")
       .then((response) => response.text())
       .then((content) => {
@@ -12,7 +11,9 @@ class LoginComponent extends HTMLElement {
       .catch((error) => {
         console.error("Error al cargar el archivo HTML:", error);
       });
+
   }
 }
 
 window.customElements.define("login-component", LoginComponent);
+

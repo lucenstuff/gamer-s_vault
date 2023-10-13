@@ -3,7 +3,7 @@ class FooterComponent extends HTMLElement {
     super();
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     fetch("src/components/footer/footer-component.html")
       .then((response) => response.text())
       .then((content) => {

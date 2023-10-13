@@ -3,24 +3,40 @@
   font-size: 1.5rem;
 }
 .form {
-  padding-top: 6rem;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+  z-index: 5;
+  position: absolute;
+  right: 1vw;
+  top: 6rem;
+  display: none;
 }
+
+.form p {
+  font-weight: 300;
+}
+
+.form.active {
+  display: inline;
+}
+
+.division-bar {
+  width: 100%;
+  height: 2px;
+  background-color: #5e5e5e; /* Choose the color you prefer */
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+
 .login-form {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  width: 90vw;
-  height: 60vh;
+  min-width: 26rem;
+  min-height: 70vh;
 
+  background-color: #d1d1d1;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(5px);
-  border-radius: 2.5%;
   align-items: center;
 }
+
 .login-form h2 {
   font-weight: 600;
   margin: 2rem;
@@ -39,9 +55,9 @@
   font-size: 1rem;
   background-color: #e6e6e6;
 }
+
 .login input {
   min-width: 87%;
-
   margin: 5px;
   padding: 0.5rem 1rem;
   border: none;
@@ -50,26 +66,29 @@
 }
 .login input {
   background-color: #d1d1d1;
-  color: #fff;
+  color: black;
   letter-spacing: 1px;
-  /*INTENTO FALLIDO DE ICONO*/
-  /* background-image: url(assets/images/icons/person.png);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: 15px; */
 }
 .input-container {
   display: flex;
   align-items: center;
   padding-bottom: 2rem;
 }
-/* .login input:nth-child(2) {
-    background-image: url(assets/images/icons/person.png);
-} */
+
+.input-container input {
+  font-weight: 300;
+  border-bottom: black 3px;
+}
+
 .login button {
   font-size: 17px;
   cursor: pointer;
 }
+
+.register {
+  cursor: pointer;
+}
+
 .register {
   margin: 5px;
   padding: 0.5rem 2rem;
@@ -78,4 +97,28 @@
   border-radius: 60px;
   font-size: 1rem;
   background-color: #e6e6e6;
+}
+
+.register-container {
+  padding-top: 5rem;
+}
+
+.register-container h4 {
+  font-weight: 400;
+}
+
+@media screen and (max-width: 890px) {
+  .form {
+    right: 0vw;
+    top: 5rem;
+  }
+
+  .login-form {
+    min-width: 100vw;
+    min-height: 76vh;
+    background-color: #d1d1d1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

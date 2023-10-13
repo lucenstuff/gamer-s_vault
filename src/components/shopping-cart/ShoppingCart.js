@@ -1,10 +1,10 @@
-class GameCard extends HTMLElement {
+class FeaturedComponent extends HTMLElement {
   constructor() {
     super();
   }
 
-   connectedCallback() {
-    fetch('src/components/game-card/game-card.html')
+  async connectedCallback() {
+    fetch('src/components/featured-games/featured-component.html')
       .then(response => response.text())
       .then(content => {
         this.innerHTML = content;
@@ -15,4 +15,4 @@ class GameCard extends HTMLElement {
   }
 }
 
-window.customElements.define('game-card', GameCard);
+window.customElements.define('featured-component', FeaturedComponent);
