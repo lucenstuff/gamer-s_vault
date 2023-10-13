@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamer's Vault</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
     <script src="src/components/header/HeaderComponent.js"></script>
     <script src="src/components/img-slider/SliderComponent.js"></script>
     <script src="src/components/featured-games/FeaturedComponent.js"></script>
@@ -15,13 +12,15 @@
     <script src="src/components/game-card/GameCard.js"></script>
     <script src="src/components/footer/FooterComponent.js"></script>
     <script src="src/components/Login/LoginComponent.js"></script>
+    <script src="src/components/shopping-cart/ShoppingCart.js"></script>
     <script src="scripts/eventHandler.js"></script>
   </head>
-  <body id="host">
-    <slider-component></slider-component>
+  <body>
     <header-component></header-component>
     <section>
+      <shopping-cart></shopping-cart>
       <login-component></login-component>
+      <slider-component></slider-component>
       <featured-component></featured-component>
       <sale-component></sale-component>
       <footer-component></footer-component>

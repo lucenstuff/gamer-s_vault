@@ -20,14 +20,13 @@ function waitForElement(selector) {
 
   });
 
-  // Promise.all([waitForElement('.shopping-cart'), waitForElement('.form')]).then((elements) => {
-  //   const shoppingCart = elements[0];
-  //   const form = elements[1];
+  Promise.all([waitForElement('.shopping-cart'), waitForElement('.cart-panel')]).then((elements) => {
+    const cartButton= elements[0];
+    const cartPanel = elements[1];
 
-  //   console.log(shoppingCart)
+    cartButton.addEventListener('click', () => {
+      cartPanel.classList.toggle("active");
+    });
 
-  //   shoppingCart.addEventListener('click', () => {
-  //     form.classList.toggle("active");
-  //   });
+  });
 
-  // });
