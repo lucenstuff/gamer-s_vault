@@ -16,7 +16,18 @@ function waitForElement(selector) {
 
     login.addEventListener('click', () => {
       form.classList.toggle("active");
-      console.log("sexo")
     });
 
   });
+
+  // Promise.all([waitForElement('.shopping-cart'), waitForElement('.form')]).then((elements) => {
+  //   const shoppingCart = elements[0];
+  //   const form = elements[1];
+
+  //   console.log(shoppingCart)
+
+  //   shoppingCart.addEventListener('click', () => {
+  //     form.classList.toggle("active");
+  //   });
+
+  // });

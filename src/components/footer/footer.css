@@ -20,6 +20,8 @@
 .footer ul {
   list-style: none;
   padding-top: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .footer li {
