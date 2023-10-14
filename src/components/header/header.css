@@ -23,8 +23,7 @@
   padding-top: 10px;
 }
 
-ul.nav-icons {
-  user-select: none;
+.nav-icons li {
   cursor: pointer;
 }
 
@@ -34,6 +33,7 @@ ul.nav-icons {
 
 .header .logo img {
   height: 75px;
+  margin-left: 0.5rem;
 }
 
 .header .nav-links li {
@@ -124,6 +124,8 @@ ul.nav-icons {
     left: 0;
     right: 0;
     z-index: 1;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
   }
 
   .nav-links.active {
@@ -132,6 +134,7 @@ ul.nav-icons {
     gap: 2rem;
     padding: 2rem;
     z-index: 10;
+    transform: translateY(0%);
   }
 
   .nav-links li {
@@ -139,7 +142,6 @@ ul.nav-icons {
     text-align: center;
   }
 }
-
 @media screen and (max-width: 512px) {
   .search-bar input[type="text"] {
     min-width: 10rem;
