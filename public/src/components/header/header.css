@@ -96,6 +96,7 @@
 
 .search-toggle {
   align-items: center;
+  cursor: pointer;
 }
 
 .nav-links.active {
