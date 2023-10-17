@@ -3,10 +3,11 @@ const mysql = require('mysql2');
 
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: 'containers-us-west-179.railway.app',
   user: 'root',
-  password: 'admin',
-  database: 'ecommerce_test',
+  password: 'L2RifKs4h3GvYKK9urFa',
+  database: 'railway',
+  port:'6365',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
