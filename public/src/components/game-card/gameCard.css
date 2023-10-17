@@ -9,6 +9,7 @@
 .product-card img {
   max-width: 100%;
   height: auto;
+  aspect-ratio: 1 / 1;
 }
 
 .card-buttons .material-icons {
@@ -24,12 +25,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding-right: 0.25rem;
-}
-
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
 }
 
 .card-bottom {
@@ -41,6 +36,7 @@
   filter: invert(17%) sepia(25%) saturate(0%) hue-rotate(115deg)
     brightness(101%) contrast(89%);
 }
+
 
 .product-card .price {
   font-size: 15px;

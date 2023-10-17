@@ -12,15 +12,13 @@ app.use(express.static('public'));
 
 const productQuery = 'SELECT * FROM Products LIMIT 36;';
 
-app.get('/getGameData', (req, res) => {
-  const productQuery = 'SELECT * FROM Products LIMIT 36;';
-
+app.get('/games', (req, res) => {
   runQuery(productQuery, (err, results) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).send('Internal server error');
     } else {
-      res.json(results); // Return the data as JSON
+      res.render('gameCard', { gameCard: results });
     }
   });
 });
