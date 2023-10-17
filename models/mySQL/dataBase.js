@@ -1,16 +1,16 @@
-const express = require('express');
-const mysql = require('mysql2');
-
+const express = require("express");
+const mysql = require("mysql2");
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'admin',
-  database: 'ecommerce_test',
+  host: "containers-us-west-179.railway.app",
+  user: "root",
+  password: "L2RifKs4h3GvYKK9urFa",
+  database: "railway",
+  port: "6365",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-})
+});
 
 function runQuery(query, callback) {
   pool.getConnection((err, connection) => {
@@ -25,4 +25,4 @@ function runQuery(query, callback) {
   });
 }
 
-module.exports ={ runQuery };
+module.exports = { runQuery };

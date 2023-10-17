@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gamer's Vault</title>
+    <script src="src/components/header/HeaderComponent.js"></script>
+    <script src="src/components/game-card/GameCard.js"></script>
+    <script src="src/components/Login/LoginComponent.js"></script>
+    <script src="src/components/shopping-cart/ShoppingCart.js"></script>
+    <script src="src/components/footer/FooterComponent.js"></script>
+    <script src="scripts/eventHandler.js"></script>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/tienda.css" />
+  </head>
+  <body>
+    <header-component></header-component>
+    <section>
+      <shopping-cart></shopping-cart>
+      <login-component></login-component>
+
+      <div class="title">
+        <h2>OFERTAS</h2>
+      </div>
+      <div class="store-container">
+        <div class="store-gallery">
+          <game-card data-product-id="1"></game-card>
+          <game-card data-product-id="2"></game-card>
+        </div>
+        <div class="store-gallery">
+          <game-card data-product-id="3"></game-card>
+          <game-card data-product-id="4"></game-card>
+        </div>
+      </div>
+      <div class="store-container">
+        <div class="store-gallery">
+          <game-card data-product-id="1"></game-card>
+          <game-card data-product-id="2"></game-card>
+        </div>
+        <div class="store-gallery">
+          <game-card data-product-id="3"></game-card>
+          <game-card data-product-id="4"></game-card>
+        </div>
+      </div>
+      <div class="store-container">
+        <div class="store-gallery">
+          <game-card data-product-id="1"></game-card>
+          <game-card data-product-id="2"></game-card>
+        </div>
+        <div class="store-gallery">
+          <game-card data-product-id="3"></game-card>
+          <game-card data-product-id="4"></game-card>
+        </div>
+      </div>
+
+      <footer-component></footer-component>
+    </section>
+  </body>
+</html>
