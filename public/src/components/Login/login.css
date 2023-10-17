@@ -1,0 +1,128 @@
+.form .material-icons {
+  color: #5e5e5e;
+  font-size: 1.5rem;
+}
+.form {
+  z-index: 5;
+  position: fixed;
+  right: 1vw;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.form.active {
+  transform: translateY(12%);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.form p {
+  font-weight: 300;
+}
+
+.division-bar {
+  width: 100%;
+  height: 2px;
+  background-color: #5e5e5e; /* Choose the color you prefer */
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  min-width: 26rem;
+  min-height: 70vh;
+  background-color: #d1d1d1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form h2 {
+  font-weight: 600;
+  margin: 2rem;
+}
+.login-form .login {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+.login button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  font-size: 1rem;
+  background-color: #e6e6e6;
+}
+
+.login input {
+  min-width: 87%;
+  margin: 5px;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.login input {
+  background-color: #d1d1d1;
+  color: black;
+  letter-spacing: 1px;
+}
+.input-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.input-container input {
+  font-weight: 300;
+  border-bottom: black 3px;
+}
+
+.login button {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.register {
+  cursor: pointer;
+}
+
+.register {
+  margin: 5px;
+  padding: 0.5rem 2rem;
+  border: none;
+  outline: none;
+  border-radius: 60px;
+  font-size: 1rem;
+  background-color: #e6e6e6;
+}
+
+.register-container {
+  padding-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.register-container h4 {
+  font-weight: 400;
+}
+
+@media screen and (max-width: 890px) {
+  .form {
+    right: 0vw;
+    top: 0rem;
+  }
+
+  .login-form {
+    min-width: 100vw;
+    min-height: 76vh;
+    background-color: #d1d1d1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

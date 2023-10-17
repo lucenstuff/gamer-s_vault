@@ -1,0 +1,39 @@
+<head>
+  <link rel="stylesheet" href="src/components/Login/login.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  />
+</head>
+<div class="form">
+  <div class="login-form">
+    <h2>Iniciar Sesión</h2>
+    <div id="login-button" class="login">
+      <p>Usuario</p>
+      <div class="input-container">
+        <i class="material-icons">person</i>
+        <input type="text" placeholder="Escribe tu mail" />
+      </div>
+      <div class="division-bar"></div>
+      <p>Contraseña</p>
+      <form action="/login" method="POST">
+        <div class="input-container">
+          <i class="material-icons">lock</i>
+          <input
+            type="password"
+            name="password"
+            autocomplete="on"
+            placeholder="Escribe tu contraseña"
+          />
+        </div>
+        <div class="division-bar"></div>
+      </form>
+      <button class="login-button">Iniciar Sesión</button>
+    </div>
+    <div class="register-container">
+      <h4>¿No tienes cuenta?</h4>
+      <button class="register">Registrarse</button>
+    </div>
+  </div>
+</div>
