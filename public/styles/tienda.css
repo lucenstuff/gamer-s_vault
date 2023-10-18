@@ -1,0 +1,29 @@
+.title h2 {
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+.store-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-left: 5.4%;
+  padding-right: 5.4%;
+}
+
+.store-gallery {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 890px) {
+  .store-gallery {
+    flex-direction: column;
+  }
+  .store-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

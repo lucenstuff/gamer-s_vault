@@ -1,6 +1,5 @@
-const express = require('express');
-const mysql = require('mysql2');
-
+const express = require("express");
+const mysql = require("mysql2");
 
 const pool = mysql.createPool({
   host: 'containers-us-west-179.railway.app',
@@ -11,7 +10,7 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-})
+});
 
 function runQuery(query, callback) {
   pool.getConnection((err, connection) => {
@@ -26,4 +25,4 @@ function runQuery(query, callback) {
   });
 }
 
-module.exports ={ runQuery };
+module.exports = { runQuery };

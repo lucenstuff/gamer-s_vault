@@ -1,0 +1,51 @@
+.cart-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.box-division {
+  position: absolute;
+  width: 90%;
+  transform: translateX(1rem);
+  height: 2px;
+  background-color: #5e5e5e;
+}
+
+.cart-box img {
+  width: 10rem;
+}
+
+.price-delete {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
+.detail-box {
+  padding-left: 1rem;
+}
+
+.price-delete h3 {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.delete-btn .material-icons {
+  color: #363636;
+  font-size: 1.7rem;
+}
+
+.delete-btn .material-icons:hover {
+  color: black;
+}
