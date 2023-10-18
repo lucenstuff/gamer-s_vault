@@ -6,6 +6,11 @@
   padding-bottom: 1rem;
 }
 
+h3{
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 .product-card img {
   max-width: 100%;
   height: auto;
