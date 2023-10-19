@@ -5,18 +5,19 @@ class GameCard extends HTMLElement {
   }
 
   connectedCallback() {
-    const productId = this.getAttribute('data-product-id');
+    const productId = this.getAttribute("data-product-id");
     if (productId) {
       this.fetchAndRenderGameData(productId);
-      this.loadGameCardCSS();
     }
   }
 
   fetchAndRenderGameData(productId) {
-    fetch('/getGameData')
-      .then(response => response.json())
-      .then(gameData => {
-        const productData = gameData.find(product => product.ProductID === parseInt(productId));
+    fetch("/getGameData")
+      .then((response) => response.json())
+      .then((gameData) => {
+        const productData = gameData.find(
+          (product) => product.ProductID === parseInt(productId)
+        );
 
         if (productData) {
           this.renderGameCard(productData);
@@ -24,21 +25,21 @@ class GameCard extends HTMLElement {
           console.error(`Product with ID ${productId} not found.`);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
 
   renderGameCard(data) {
-    fetch('src/components/game-card/game-card.html')
-      .then(response => response.text())
-      .then(html => {
-        const template = document.createElement('template');
+    fetch("src/components/game-card/game-card.html")
+      .then((response) => response.text())
+      .then((html) => {
+        const template = document.createElement("template");
         template.innerHTML = html.trim();
         const content = template.content.cloneNode(true);
-        const image = content.querySelector('.product-card img');
-        const title = content.querySelector('.product-card h3');
-        const price = content.querySelector('.product-card .price');
+        const image = content.querySelector(".product-card img");
+        const title = content.querySelector(".product-card h3");
+        const price = content.querySelector(".product-card .price");
 
         image.src = data.ImageURL;
         image.alt = data.ProductName;
@@ -47,10 +48,10 @@ class GameCard extends HTMLElement {
 
         this.appendChild(content);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
 }
 
-window.customElements.define('game-card', GameCard);
+window.customElements.define("game-card", GameCard);
