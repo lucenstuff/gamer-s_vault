@@ -97,6 +97,7 @@
 @media screen and (max-width: 890px) {
   .login-form-container {
     right: 0vw;
+    max-width: 100%;
     min-width: 100%;
     position: absolute;
   }
