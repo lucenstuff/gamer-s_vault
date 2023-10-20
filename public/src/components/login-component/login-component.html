@@ -1,0 +1,40 @@
+<head>
+  <link rel="stylesheet" href="src/components/login-component/login.css" />
+</head>
+<div class="login-form-container">
+  <h2>Iniciar Sesión</h2>
+  <div class="form-container"></div>
+  <form id="login-form">
+    <div class="form-group">
+      <p>Nombre de Usuario</p>
+      <i class="material-icons person">person</i>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="juanperez44"
+        required
+      />
+      <div class="division-bar"></div>
+    </div>
+    <div class="form-group">
+      <p>Contraseña</p>
+      <i class="material-icons person">lock</i>
+      <input
+        type="password"
+        id="password"
+        placeholder="********"
+        name="password"
+        required
+      />
+      <div class="division-bar"></div>
+    </div>
+    <div class="button-container">
+      <button class="login-btn" type="submit">Iniciar Sesión</button>
+    </div>
+    <div class="text">
+      <h3>¿No tienes una cuenta?</h3>
+      <a class="to-register">Registrarse</a>
+    </div>
+  </form>
+</div>

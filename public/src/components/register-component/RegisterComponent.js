@@ -1,10 +1,10 @@
-class LoginComponent extends HTMLElement {
+class RegisterComponent extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
-    fetch("src/components/Login/login-component.html")
+    fetch("src/components/register-component/register-component.html")
       .then((response) => response.text())
       .then((content) => {
         this.innerHTML = content;
@@ -21,26 +21,26 @@ class LoginComponent extends HTMLElement {
       registerForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const usernameInput = registerForm.querySelector("#username");
-        const nameImput = registerForm.querySelector("#firstName");
-        const lastNameImput = registerForm.querySelector("#lastName");
+        const nameInput = registerForm.querySelector("#firstName");
+        const lastNameInput = registerForm.querySelector("#lastName");
         const emailInput = registerForm.querySelector("#email");
         const passwordInput = registerForm.querySelector("#password");
-        const repaswwordInput = registerForm.querySelector("#repassword");
+        const repasswordInput = registerForm.querySelector("#repassword");
 
-        const firstName = nameImput.value;
-        const lastName = lastNameImput.value;
+        const firstName = nameInput.value;
+        const lastName = lastNameInput.value;
         const username = usernameInput.value;
         const email = emailInput.value;
         const password = passwordInput.value;
-        const repassword = repaswwordInput.value;
+        const repassword = repasswordInput.value;
 
         if (password !== repassword) {
-          alert("Las contraseñas no coinciden");
+          alert("Las contraseñas no coinciden");
           return;
         }
 
         if (password.length < 8) {
-          alert("La contraseña debe tener al menos 8 caracteres");
+          alert("La contraseña debe tener al menos 8 caracteres");
           return;
         }
 
@@ -49,12 +49,12 @@ class LoginComponent extends HTMLElement {
           return;
         }
 
-        nameImput.value = "";
-        lastNameImput.value = "";
+        nameInput.value = "";
+        lastNameInput.value = "";
         usernameInput.value = "";
         emailInput.value = "";
         passwordInput.value = "";
-        repaswwordInput.value = "";
+        repasswordInput.value = "";
 
         this.addUserToDatabase(username, email, password, firstName, lastName);
 
@@ -87,4 +87,4 @@ class LoginComponent extends HTMLElement {
   }
 }
 
-window.customElements.define("login-component", LoginComponent);
+window.customElements.define("register-component", RegisterComponent);
