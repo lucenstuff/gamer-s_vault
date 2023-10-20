@@ -6,7 +6,7 @@
 
 .register-form-container {
   z-index: 9;
-  position: fixed;
+  position: absolute;
   right: 2vw;
   margin-top: 0rem;
   background-color: #d1d1d1;

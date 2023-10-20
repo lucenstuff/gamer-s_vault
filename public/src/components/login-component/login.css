@@ -1,6 +1,6 @@
 .login-form-container {
   z-index: 99;
-  position: fixed;
+  position: absolute;
   right: 2vw;
   margin-top: 0rem;
   background-color: #d1d1d1;
