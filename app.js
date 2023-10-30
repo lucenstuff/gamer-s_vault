@@ -4,12 +4,6 @@ const ejs = require("ejs");
 const path = require("path");
 const { runQuery } = require("./models/mySQL/dataBase");
 
-app.set("view engine", "ejs");
-app.set(
-  "views",
-  path.join(__dirname, "public", "src", "components", "game-card")
-);
-
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

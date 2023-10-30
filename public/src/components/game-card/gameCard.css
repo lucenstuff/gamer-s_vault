@@ -6,7 +6,7 @@
   padding-bottom: 1rem;
 }
 
-h3{
+h3 {
   font-size: 1rem;
   font-weight: 400;
 }
@@ -41,7 +41,6 @@ h3{
   filter: invert(17%) sepia(25%) saturate(0%) hue-rotate(115deg)
     brightness(101%) contrast(89%);
 }
-
 
 .product-card .price {
   font-size: 15px;
