@@ -38,6 +38,14 @@ app.post("/addUser", (req, res) => {
   });
 });
 
+app.get("/store", function (req, res) {
+  res.sendFile(__dirname + "/public/store.html");
+});
+
+app.get("/sales", function (req, res) {
+  res.sendFile(__dirname + "/public/sales.html");
+});
+
 app.listen(3000, () => {
   console.log("Server listening on http://localhost:3000");
 });
