@@ -2,11 +2,11 @@ const express = require("express");
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
-  host: "containers-us-west-179.railway.app",
-  user: "root",
-  password: "L2RifKs4h3GvYKK9urFa",
-  database: "railway",
-  port: "6365",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
