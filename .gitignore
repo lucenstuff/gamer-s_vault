@@ -1,3 +1,4 @@
 template
 **/node_modules
 **/models
+.env

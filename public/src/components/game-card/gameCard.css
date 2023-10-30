@@ -6,6 +6,10 @@
   padding-bottom: 1rem;
 }
 
+.card-text-container {
+  height: 3rem;
+}
+
 h3 {
   font-size: 1rem;
   font-weight: 400;
@@ -35,6 +39,7 @@ h3 {
 .card-bottom {
   display: flex;
   justify-content: space-between;
+  bottom: 0;
 }
 
 .card-buttons a img {
