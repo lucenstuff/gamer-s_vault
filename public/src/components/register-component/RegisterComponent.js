@@ -26,7 +26,6 @@ class RegisterComponent extends HTMLElement {
         const emailInput = registerForm.querySelector("#email");
         const passwordInput = registerForm.querySelector("#password");
         const repasswordInput = registerForm.querySelector("#repassword");
-
         const firstName = nameInput.value;
         const lastName = lastNameInput.value;
         const username = usernameInput.value;
