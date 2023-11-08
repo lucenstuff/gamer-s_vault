@@ -1,16 +1,35 @@
 const express = require("express");
 const app = express();
-const ejs = require("ejs");
-const path = require("path");
 const bcrypt = require("bcrypt");
 const { runQuery } = require("./models/mySQL/dataBase");
-const jwt = require("jsonwebtoken");
+const session = require("express-session");
 
+const saltRounds = 10;
+
+// Middleware
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "keyboardcat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-const productQuery = "SELECT * FROM Products LIMIT 36;";
+// Routes
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/store", (req, res) => {
+  res.sendFile(__dirname + "/public/store.html");
+});
+
+app.get("/sales", (req, res) => {
+  res.sendFile(__dirname + "/public/sales.html");
+});
 
 app.get("/getGameData", (req, res) => {
   const productQuery = "SELECT * FROM Products LIMIT 36;";
@@ -28,7 +47,6 @@ app.get("/getGameData", (req, res) => {
 app.post("/addUser", (req, res) => {
   const { username, email, password, firstName, lastName } = req.body;
 
-  const saltRounds = 10;
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) {
       console.error(err);
@@ -41,9 +59,10 @@ app.post("/addUser", (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
       }
 
-      const insertQuery = `INSERT INTO Users (Username, Password, Email, FirstName, LastName) VALUES ('${username}', '${hashedPassword}', '${email}', '${firstName}', '${lastName}')`;
+      const insertQuery = `INSERT INTO Users (Username, Password, Email, FirstName, LastName) VALUES (?, ?, ?, ?, ?)`;
+      const values = [username, hashedPassword, email, firstName, lastName];
 
-      runQuery(insertQuery, (err, results) => {
+      runQuery(insertQuery, values, (err, results) => {
         if (err) {
           console.error(err);
           return res.status(500).json({ error: "Internal server error" });
@@ -58,41 +77,39 @@ app.post("/addUser", (req, res) => {
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  const selectQuery = `SELECT * FROM Users WHERE Username = '${username}'`;
-  runQuery(selectQuery, (err, results) => {
+  const selectQuery = `SELECT * FROM Users WHERE Username = ?`;
+  const values = [username];
+
+  runQuery(selectQuery, values, (err, results) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: "Internal server error" });
     }
 
-    if (results.length === 0) {
-      return res.status(401).json({ error: "Invalid username or password" });
+    if (results.length === 1) {
+      const user = results[0];
+
+      bcrypt.compare(password, user.Password, (err, isMatch) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Internal server error" });
+        }
+
+        if (isMatch) {
+          req.session.username = username;
+          return res.json({ success: true });
+        } else {
+          return res.json({ success: false });
+        }
+      });
+    } else {
+      return res.json({ success: false });
     }
-
-    const user = results[0];
-    bcrypt.compare(password, user.Password, (err, isMatch) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-
-      if (!isMatch) {
-        return res.status(401).json({ error: "Invalid username or password" });
-      }
-
-      const token = jwt.sign({ username: user.Username }, "DhMS2DD15S");
-
-      res.json({ message: "Login successful", token: token });
-    });
   });
 });
 
-app.get("/store", function (req, res) {
-  res.sendFile(__dirname + "/public/store.html");
-});
-
-app.get("/sales", function (req, res) {
-  res.sendFile(__dirname + "/public/sales.html");
+app.use((req, res) => {
+  res.status(404).send("404 - Not Found");
 });
 
 app.listen(3000, () => {

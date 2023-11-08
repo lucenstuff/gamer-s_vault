@@ -26,7 +26,6 @@ class LoginComponent extends HTMLElement {
 
         username.value = "";
         password.value = "";
-        alert("Login successful");
       });
     } else {
       console.error("Login form not found");
@@ -46,8 +45,11 @@ class LoginComponent extends HTMLElement {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("User logged in:", data.token);
-        localStorage.setItem("token", data.token);
+        if (data.success) {
+          alert("Login successful");
+        } else {
+          alert("Invalid username or password");
+        }
       })
       .catch((error) => {
         console.error("Error logging in:", error);

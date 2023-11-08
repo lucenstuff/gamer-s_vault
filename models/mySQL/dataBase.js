@@ -13,12 +13,12 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-function runQuery(query, callback) {
+function runQuery(query, values, callback) {
   pool.getConnection((err, connection) => {
     if (err) {
       callback(err, null);
     } else {
-      connection.query(query, (queryError, results) => {
+      connection.query(query, values, (queryError, results) => {
         connection.release();
         callback(queryError, results);
       });
