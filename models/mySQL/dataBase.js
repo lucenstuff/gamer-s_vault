@@ -12,7 +12,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
-function runQuery(query, callback) {
+async function runQuery(query, callback) {
   pool.getConnection((err, connection) => {
     if (err) {
       callback(err, null);
