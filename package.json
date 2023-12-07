@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "The gamer's vault",
   "main": "index.js",
-  "engines": {
-    "node": "18.x"
-  },
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",

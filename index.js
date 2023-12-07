@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
-const { runQuery } = require("./models/mySQL/dataBase");
+const { runQuery } = require("./public/scripts/dataBase");
 const session = require("express-session");
 
 const saltRounds = 10;
