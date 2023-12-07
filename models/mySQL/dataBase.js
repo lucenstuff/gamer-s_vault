@@ -23,22 +23,17 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-DB_HOST = aws.connect.psdb.cloud;
-DB_USER =
-  DB_PASSWORD =
-  DB_DATABASE =
-  DB_PORT =
-    async function runQuery(query, callback) {
-      pool.getConnection((err, connection) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          connection.query(query, (queryError, results) => {
-            connection.release();
-            callback(queryError, results);
-          });
-        }
+async function runQuery(query, callback) {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      connection.query(query, (queryError, results) => {
+        connection.release();
+        callback(queryError, results);
       });
-    };
+    }
+  });
+}
 
 module.exports = { runQuery };
