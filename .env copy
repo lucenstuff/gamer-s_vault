@@ -1,0 +1,11 @@
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=pepe1234
+DB_DATABASE=gamers_vault
+DB_PORT=3306
+
+# DB_HOST=viaduct.proxy.rlwy.net
+# DB_USER=root
+# DB_PASSWORD=AGb1hEDFaed4c21B-e4H1-1C1BGChd2E
+# DB_DATABASE=railway
+# DB_PORT=43699
