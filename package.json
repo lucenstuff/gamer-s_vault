@@ -1,6 +1,7 @@
 {
-  "name": "gamer's_vault",
+  "name": "gamers_vault",
   "version": "1.0.0",
+  "homepage": "https://gamer-s-vault.vercel.app/",
   "description": "",
   "main": "index.js",
   "scripts": {
