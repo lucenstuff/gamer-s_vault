@@ -27,8 +27,8 @@ app.get("/store", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "store.html"));
 });
 
-app.get("/store", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "store.html"));
+app.get("/sales", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "sales.html"));
 });
 
 app.get("/getGameData", (req, res) => {
