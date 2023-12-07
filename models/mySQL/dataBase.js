@@ -17,12 +17,19 @@ function runQuery(query, values, callback) {
   pool.getConnection((err, connection) => {
     if (err) {
       callback(err, null);
-    } else {
-      connection.query(query, values, (queryError, results) => {
-        connection.release();
-        callback(queryError, results);
-      });
+      return;
     }
+
+    connection.query(query, values, (queryError, results) => {
+      connection.release();
+
+      if (queryError) {
+        callback(queryError, null);
+        return;
+      }
+
+      callback(null, results);
+    });
   });
 }
 
