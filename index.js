@@ -20,15 +20,15 @@ app.use(
 
 // Routes
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.get("/store", (req, res) => {
-  res.sendFile(__dirname + "/public/store.html");
+  res.sendFile(path.join(__dirname, "public", "store.html"));
 });
 
-app.get("/sales", (req, res) => {
-  res.sendFile(__dirname + "/public/sales.html");
+app.get("/store", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "store.html"));
 });
 
 app.get("/getGameData", (req, res) => {
