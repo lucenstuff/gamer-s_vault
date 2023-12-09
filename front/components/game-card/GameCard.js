@@ -22,26 +22,38 @@ class GameCard extends HTMLElement {
         this.image = newValue;
         break;
     }
+
+    // Call the render method when all attributes are set
+    if (this.name && this.price && this.image) {
+      this.render();
+    }
   }
 
   connectedCallback() {
+    // No need to fetch HTML here; wait for attributeChangedCallback to be called
+  }
+
+  render() {
     fetch("components/game-card/game-card.html")
       .then((response) => response.text())
       .then((content) => {
-        const parser = new DOMParser();
-        const html = parser.parseFromString(content, "text/html");
+        const template = document.createElement("template");
+        template.innerHTML = content;
 
-        const titleElement = html.querySelector("[data-name='title']");
-        const priceElement = html.querySelector("[data-price='price']");
-        const imageElement = html.querySelector(".product-card img");
+        const titleElement = template.content.querySelector(
+          "[data-name='title']"
+        );
+        const priceElement = template.content.querySelector(
+          "[data-price='price']"
+        );
+        const imageElement =
+          template.content.querySelector(".product-card img");
 
-        titleElement.textContent = this.getAttribute("name");
-        priceElement.textContent = this.getAttribute("price");
-        imageElement.setAttribute("src", this.getAttribute("image"));
+        titleElement.textContent = this.name;
+        priceElement.textContent = this.price;
+        imageElement.setAttribute("src", this.image);
 
-        // Append the fetched HTML content to the component
-        this.appendChild(html.head);
-        this.appendChild(html.body.firstChild);
+        this.appendChild(template.content.cloneNode(true));
       })
       .catch((error) => {
         console.error("Error loading HTML file:", error);

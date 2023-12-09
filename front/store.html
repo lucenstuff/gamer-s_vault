@@ -4,47 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamer's Vault</title>
-    <script src="src/components/header/HeaderComponent.js"></script>
-    <script src="src/components/game-card/GameCard.js"></script>
-    <script src="src/components/Login/LoginComponent.js"></script>
-    <script src="src/components/shopping-cart/ShoppingCart.js"></script>
-    <script src="src/components/footer/FooterComponent.js"></script>
-    <script src="scripts/eventHandler.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="styles/tienda.css" />
+    <script src="utils/apiConnection.js"></script>
+    <script src="utils/eventHandler.js"></script>
+    <script src="components/header/HeaderComponent.js"></script>
+    <script src="components/img-slider/SliderComponent.js"></script>
+    <script src="components/featured-games/FeaturedComponent.js"></script>
+    <script src="components/sale-container/SaleComponent.js"></script>
+    <script src="components/game-card/GameCard.js"></script>
+    <script src="components/footer/FooterComponent.js"></script>
+    <script src="components/shopping-cart/ShoppingCart.js"></script>
+    <script src="components/cart-box/CartBox.js"></script>
+    <script src="components/login-component/LoginComponent.js"></script>
+    <script src="components/register-component/RegisterComponent.js"></script>
   </head>
   <body>
     <header-component></header-component>
     <section>
       <shopping-cart></shopping-cart>
       <login-component></login-component>
-      <div class="title">
-        <h2>TIENDA</h2>
-      </div>
-      <div class="store-container">
-        <div class="store-gallery">
-          <game-card data-product-id="1"></game-card>
-          <game-card data-product-id="2"></game-card>
-        </div>
-        <div class="store-gallery">
-          <game-card data-product-id="3"></game-card>
-          <game-card data-product-id="4"></game-card>
-        </div>
-      </div>
-      <div class="store-container">
-        <div class="store-gallery">
-          <game-card data-product-id="5"></game-card>
-          <game-card data-product-id="6"></game-card>
-        </div>
-        <div class="store-gallery">
-          <game-card data-product-id="7"></game-card>
-          <game-card data-product-id="8"></game-card>
-        </div>
-      </div>
+      <register-component></register-component>
+      <sale-component></sale-component>
       <footer-component></footer-component>
     </section>
   </body>
