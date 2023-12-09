@@ -1,0 +1,104 @@
+.login-form-container {
+  z-index: 99;
+  position: absolute;
+  right: 2vw;
+  margin-top: 3rem;
+  background-color: #d1d1d1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  visibility: hidden;
+}
+.login-form-container.active {
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.login-form-container h2 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.material-icons {
+  color: #5e5e5e;
+}
+
+.form-group input {
+  font-size: 1rem;
+  font-weight: 400;
+  min-width: 2rem;
+  margin: 5px;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  padding-top: 0.2rem;
+}
+
+.form-group {
+  padding: 0.5rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-btn {
+  background-color: #dfdfdf;
+  color: black;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 2rem;
+  width: 10rem;
+}
+
+.text h3 {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.text a {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: #5e5e5e;
+}
+
+.text a:hover {
+  color: black;
+}
+
+.material-icons.person {
+  transform: translatey(0.3rem);
+}
+
+.to-register {
+  cursor: pointer;
+}
+
+.division-bar {
+  width: 100%;
+  height: 2px;
+  background-color: #949494;
+}
+
+@media screen and (max-width: 890px) {
+  .login-form-container {
+    right: 0vw;
+    max-width: 100%;
+    min-width: 100%;
+    position: absolute;
+  }
+}
