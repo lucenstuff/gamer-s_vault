@@ -14,16 +14,24 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
-async function runQuery(query, callback) {
-  pool.getConnection((err, connection) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      connection.query(query, (queryError, results) => {
-        connection.release();
-        callback(queryError, results);
-      });
-    }
+
+function runQuery(query, values = []) {
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+      } else {
+        connection.query(query, values, (queryError, results) => {
+          connection.release();
+
+          if (queryError) {
+            reject(queryError);
+          } else {
+            resolve(results);
+          }
+        });
+      }
+    });
   });
 }
 
