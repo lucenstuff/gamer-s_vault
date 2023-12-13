@@ -18,42 +18,23 @@ class LoginComponent extends HTMLElement {
   setupLoginForm() {
     const loginForm = this.querySelector("#login-form");
     if (loginForm) {
-      loginForm.addEventListener("submit", (event) => {
+      loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const username = loginForm.querySelector("#login_username");
+        const email = loginForm.querySelector("#login_email");
         const password = loginForm.querySelector("#login_password");
-        this.userLogin(username.value, password.value);
 
-        username.value = "";
+        try {
+          const token = await authenticateUser(email.value, password.value);
+          //reload the page
+          location.reload();
+        } catch (error) {
+          // console.error("Error during authentication:", error);
+        }
+
+        email.value = "";
         password.value = "";
       });
-    } else {
-      console.error("Login form not found");
     }
-  }
-
-  userLogin(username, password) {
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Login successful");
-        } else {
-          alert("Invalid username or password");
-        }
-      })
-      .catch((error) => {
-        console.error("Error logging in:", error);
-      });
   }
 }
 

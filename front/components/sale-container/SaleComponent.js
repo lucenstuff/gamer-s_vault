@@ -11,48 +11,48 @@ class SaleComponent extends HTMLElement {
       const content = await response.text();
       this.innerHTML = content;
 
-      const gameCardElements = this.querySelectorAll("game-card");
-
-      Array.from(gameCardElements).forEach((gameCardElement) => {
+      const gameCardElements = Array.from(this.querySelectorAll("game-card"));
+      const fetchPromises = gameCardElements.map((gameCardElement) => {
         const id = gameCardElement.getAttribute("product-id");
-        this.fetchProductDetails(id)
-          .then((productData) => {
-            if (productData) {
-              this.updateGameCard(gameCardElement, productData);
-            } else {
-              console.error(`Error fetching product details for ID: ${id}`);
-            }
-          })
-          .catch((error) =>
-            console.error(`Error fetching product details:`, error)
-          );
+        return this.fetchProductDetails(id).then((productData) => {
+          if (productData) {
+            this.updateGameCard(gameCardElement, productData);
+          } else {
+            console.error(`Error fetching product details for ID: ${id}`);
+          }
+        });
       });
+      await Promise.all(fetchPromises);
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
-  fetchProductDetails(id) {
-    return new Promise((resolve, reject) => {
-      getSingleProducts(id)
-        .then((productData) => {
-          if (
-            productData &&
-            productData.name &&
-            productData.price &&
-            productData.image
-          ) {
-            resolve({
-              name: productData.name,
-              price: productData.price,
-              image: productData.image,
-            });
-          } else {
-            resolve(null); // Resolve with null if the product details are invalid
-          }
-        })
-        .catch((error) => reject(error));
-    });
+  async fetchProductDetails(id) {
+    try {
+      const productData = await getSingleProducts(id);
+      if (
+        productData &&
+        productData.ProductName &&
+        productData.Price &&
+        productData.ImageURL
+      ) {
+        return {
+          name: productData.ProductName,
+          price: productData.Price,
+          image: productData.ImageURL,
+        };
+      } else {
+        console.error(
+          `Product data is missing required properties for ID ${id}:`,
+          productData
+        );
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error fetching product details for ID ${id}:`, error);
+      throw error; // Rethrow the error to be caught by the caller
+    }
   }
 
   updateGameCard(gameCardElement, { name, price, image }) {

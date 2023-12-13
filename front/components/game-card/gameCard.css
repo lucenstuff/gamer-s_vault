@@ -1,13 +1,18 @@
 .product-card {
   background-color: #d1d1d1;
   text-align: left;
-  max-width: 25rem;
+  font-weight: 500;
+  max-width: 26rem;
   width: 100%;
   padding-bottom: 1rem;
 }
 
 .card-text-container {
   height: 3rem;
+}
+
+.card-title {
+  font-weight: 500;
 }
 
 h3 {
@@ -49,6 +54,7 @@ h3 {
 
 .product-card .price {
   font-size: 15px;
+
   color: black;
   margin: 10px 0;
 }

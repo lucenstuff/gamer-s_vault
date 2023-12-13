@@ -13,7 +13,7 @@
   align-items: center;
   height: 80px;
   padding: 5px 5%;
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   right: 0;
@@ -35,7 +35,7 @@
 }
 
 .header .logo img {
-  height: 75px;
+  height: 80px;
   margin-left: 0.5rem;
 }
 
@@ -150,5 +150,9 @@
   .search-bar input[type="text"] {
     min-width: 10rem;
     max-width: 10rem;
+  }
+
+  .header .logo img {
+    height: 3.5rem;
   }
 }

@@ -55,35 +55,11 @@ class RegisterComponent extends HTMLElement {
         passwordInput.value = "";
         repasswordInput.value = "";
 
-        this.addUserToDatabase(username, email, password, firstName, lastName);
+        userRegister(username, email, password, firstName, lastName);
 
         alert("Usuario registrado exitosamente");
       });
     }
   }
-
-  addUserToDatabase(username, email, password, firstName, lastName) {
-    fetch("/addUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("User added to the database:", data);
-      })
-      .catch((error) => {
-        console.error("Error adding user to the database:", error);
-      });
-  }
 }
-
 window.customElements.define("register-component", RegisterComponent);

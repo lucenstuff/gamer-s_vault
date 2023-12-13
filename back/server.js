@@ -1,8 +1,9 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 const { runQuery } = require("./middleware/dbconnection");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -11,6 +12,11 @@ app.use(
     origin: "http://127.0.0.1:5500",
   })
 );
+
+const bycrypt = require("bcrypt");
+const saltRound = 10;
+
+bycrypt.hash("password", saltRound, function (err, hash) {});
 
 app.use(express.json());
 
@@ -50,16 +56,19 @@ app.get("/api/products/:id", async (req, res) => {
 });
 
 //User registration
-app.post("/api/singup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const { username, email, password, firstName, lastName } = req.body;
+    if (!password) {
+      return res.status(400).json({ error: "Password is required" });
+    }
 
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const Password = await bcrypt.hash(password, salt);
 
     const insertQuery =
       "INSERT INTO Users (Username, Password, Email, FirstName, LastName) VALUES (?, ?, ?, ?, ?)";
-    const values = [username, hashedPassword, email, firstName, lastName];
+    const values = [username, Password, email, firstName, lastName];
 
     await runQuery(insertQuery, values);
     res.status(201).json({ success: true });
@@ -69,41 +78,43 @@ app.post("/api/singup", async (req, res) => {
   }
 });
 
-// app.post("/api/authenticate", async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
+//user authentication
 
-//     const selectQuery = "SELECT * FROM Users WHERE Username = ?";
-//     const values = [username];
+app.post("/api/authenticate", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
 
-//     const results = await runQuery(selectQuery, values);
+    const userQuery = "SELECT * FROM Users WHERE Email = ?;";
+    const user = await runQuery(userQuery, [email]);
 
-//     if (results.length === 1) {
-//       const user = results[0];
+    if (!user || user.length === 0) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
 
-//       const isMatch = await bcrypt.compare(password, user.Password);
+    const passwordMatch = await bcrypt.compare(password, user[0].Password);
 
-//       if (isMatch) {
-//         // Authentication successful
-//         return res.json({ success: true });
-//       } else {
-//         // Authentication failed
-//         return res
-//           .status(401)
-//           .json({ success: false, message: "Authentication failed" });
-//       }
-//     } else {
-//       // No user found with the username
-//       return res
-//         .status(401)
-//         .json({ success: false, message: "Authentication failed" });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     // Internal server error
-//     return res.status(500).json({ error: "Internal server error" });
-//   }
-// });
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign(
+      { userId: user[0].UserID, email: user[0].Email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h", // Token expiration time
+      }
+    );
+
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.use((req, res) => {
   res.status(404).json({ error: "Not Found" });

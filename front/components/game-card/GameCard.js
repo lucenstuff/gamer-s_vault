@@ -23,14 +23,38 @@ class GameCard extends HTMLElement {
         break;
     }
 
-    // Call the render method when all attributes are set
     if (this.name && this.price && this.image) {
       this.render();
     }
   }
 
   connectedCallback() {
-    // No need to fetch HTML here; wait for attributeChangedCallback to be called
+    this.addEventListener("click", this.handleAddToCart.bind(this));
+    this.addEventListener("click", this.handleAddToFavorites.bind(this));
+  }
+
+  handleAddToCart(event) {
+    const target = event.target;
+    if (target.classList.contains("cart")) {
+      this.addToCart();
+    }
+  }
+
+  handleAddToFavorites(event) {
+    const target = event.target;
+    if (target.classList.contains("heart")) {
+      this.addToFavorites();
+    }
+  }
+
+  addToFavorites() {
+    //Implement Favorites Logic
+    console.log("Product added to favorites:", this.name);
+  }
+
+  addToCart() {
+    //Implement Cart Logic
+    console.log("Product added to cart:", this.name);
   }
 
   render() {
@@ -50,7 +74,7 @@ class GameCard extends HTMLElement {
           template.content.querySelector(".product-card img");
 
         titleElement.textContent = this.name;
-        priceElement.textContent = this.price;
+        priceElement.textContent = "$" + this.price;
         imageElement.setAttribute("src", this.image);
 
         this.appendChild(template.content.cloneNode(true));
