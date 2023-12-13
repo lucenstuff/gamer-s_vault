@@ -4,6 +4,7 @@ class GameCard extends HTMLElement {
     this.name;
     this.price;
     this.image;
+    this.isInCart = false;
   }
 
   static get observedAttributes() {
@@ -29,32 +30,17 @@ class GameCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.addEventListener("click", this.handleAddToCart.bind(this));
-    this.addEventListener("click", this.handleAddToFavorites.bind(this));
+    this.addEventListener("click", this.handleIconClick.bind(this));
   }
 
-  handleAddToCart(event) {
-    const target = event.target;
-    if (target.classList.contains("cart")) {
-      this.addToCart();
-    }
-  }
+  renderIcons() {
+    const cartIcon = this.isInCart
+      ? "remove_shopping_cart"
+      : "add_shopping_cart";
 
-  handleAddToFavorites(event) {
-    const target = event.target;
-    if (target.classList.contains("heart")) {
-      this.addToFavorites();
-    }
-  }
+    const cartElement = this.querySelector(".cart");
 
-  addToFavorites() {
-    //Implement Favorites Logic
-    console.log("Product added to favorites:", this.name);
-  }
-
-  addToCart() {
-    //Implement Cart Logic
-    console.log("Product added to cart:", this.name);
+    cartElement.textContent = cartIcon;
   }
 
   render() {
@@ -78,10 +64,36 @@ class GameCard extends HTMLElement {
         imageElement.setAttribute("src", this.image);
 
         this.appendChild(template.content.cloneNode(true));
+
+        this.renderIcons();
       })
       .catch((error) => {
         console.error("Error loading HTML file:", error);
       });
+  }
+
+  handleIconClick(event) {
+    const target = event.target;
+    if (target.classList.contains("cart")) {
+      if (this.isInCart) {
+        this.removeFromCart();
+      } else {
+        this.addToCart();
+      }
+      this.renderIcons();
+    }
+  }
+
+  addToCart() {
+    this.isInCart = true;
+    const cartItem = { name: this.name, price: this.price, image: this.image };
+    eventBus.emit("addToCart", cartItem);
+  }
+
+  removeFromCart() {
+    this.isInCart = false;
+    const cartItem = { name: this.name, price: this.price, image: this.image };
+    eventBus.emit("removeFromCart", cartItem);
   }
 }
 

@@ -64,27 +64,23 @@ class ShoppingCart extends HTMLElement {
       cartBoxContainer.innerHTML = "";
 
       this.cartItems.forEach((item) => {
-        const cartBox = document.createElement("cart-item");
-        cartBox.name = item.name;
-        cartBox.price = item.price;
-        cartBox.image = item.image;
-        cartBoxContainer.appendChild(cartBox);
+        const cartItem = document.createElement("cart-item");
+        cartItem.name = item.name;
+        cartItem.price = item.price;
+        cartItem.image = item.image;
+        cartBoxContainer.appendChild(cartItem);
       });
 
       const totalPriceElement = this.querySelector(
         ".price-container h3:last-child"
       );
 
-      // Ensure all item prices are valid numbers before summing
-      const totalPrice = this.cartItems
-        .map((item) => Number(item.price))
-        .filter((price) => !isNaN(price))
-        .reduce((sum, price) => sum + price, 0);
-
-      if (!isNaN(totalPrice) && totalPriceElement) {
+      const totalPrice = this.cartItems.reduce(
+        (sum, item) => sum + Number(item.price),
+        0
+      );
+      if (totalPriceElement) {
         totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-      } else {
-        console.warn("Invalid total price:", totalPrice);
       }
     }
   }
