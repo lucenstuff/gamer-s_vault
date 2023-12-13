@@ -55,6 +55,73 @@ app.get("/api/products/:id", async (req, res) => {
   }
 });
 
+app.post("/api/addtocart/:id", async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { quantity, userId } = req.body;
+
+    const productQuery = "SELECT * FROM Products WHERE ProductID = ?";
+    const product = await runQuery(productQuery, [productId]);
+
+    if (!product || product.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const activeCartQuery =
+      "SELECT * FROM ShoppingCarts WHERE UserID = ? AND CartStatus = 'active'";
+    const activeCart = await runQuery(activeCartQuery, [userId]);
+
+    if (activeCart && activeCart.length > 0) {
+      const updateCartQuery =
+        "INSERT INTO CartItems (CartID, ProductID, Quantity) VALUES (?, ?, ?)";
+      const updateCartValues = [activeCart[0].CartID, productId, quantity || 1];
+      await runQuery(updateCartQuery, updateCartValues);
+    } else {
+      const createCartQuery =
+        "INSERT INTO ShoppingCarts (UserID, CartStatus) VALUES (?, 'active')";
+      const createCartValues = [userId];
+      const result = await runQuery(createCartQuery, createCartValues);
+
+      const newCartId = result.insertId;
+      const addToCartQuery =
+        "INSERT INTO CartItems (CartID, ProductID, Quantity) VALUES (?, ?, ?)";
+      const addToCartValues = [newCartId, productId, quantity || 1];
+      await runQuery(addToCartQuery, addToCartValues);
+    }
+
+    res.status(201).json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/api/getcart/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const activeCartQuery =
+      "SELECT * FROM ShoppingCarts WHERE UserID = ? AND CartStatus = 'active'";
+    const activeCart = await runQuery(activeCartQuery, [userId]);
+
+    if (!activeCart || activeCart.length === 0) {
+      return res.status(404).json({ error: "Cart not found" });
+    }
+    const cartItemsQuery = `
+      SELECT CI.ProductID, CI.Quantity, P.ProductName, P.Price
+      FROM CartItems CI
+      INNER JOIN Products P ON CI.ProductID = P.ProductID
+      WHERE CI.CartID = ?
+    `;
+    const cartItems = await runQuery(cartItemsQuery, [activeCart[0].CartID]);
+
+    res.status(200).json({ cartItems });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 //User registration
 app.post("/api/signup", async (req, res) => {
   try {
@@ -75,6 +142,7 @@ app.post("/api/signup", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
+    //NEED TO HANDLE EXISTING USER
   }
 });
 
