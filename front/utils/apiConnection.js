@@ -14,14 +14,10 @@ async function getProducts() {
 
 async function getSingleProducts(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/products/${id}`);
+    const response = await fetch("http://localhost:8080/api/products/" + id);
     if (response.ok) {
       const data = await response.json();
-      if (Array.isArray(data) && data.length > 0) {
-        return data[0];
-      } else {
-        return data;
-      }
+      return data;
     } else {
       throw new Error("Error: " + response.status);
     }
@@ -30,7 +26,14 @@ async function getSingleProducts(id) {
   }
 }
 
-async function userRegister(username, email, password, firstName, lastName) {
+async function userRegister(
+  username,
+  email,
+  password,
+  firstName,
+  lastName,
+  callback
+) {
   try {
     const response = await fetch("http://localhost:8080/api/signup", {
       method: "POST",
@@ -45,14 +48,21 @@ async function userRegister(username, email, password, firstName, lastName) {
         lastName,
       }),
     });
+
     if (response.ok) {
       const data = await response.json();
+      if (callback) {
+        callback(null, data);
+      }
       return data;
     } else {
       throw new Error("Error: " + response.status);
     }
   } catch (error) {
     console.error("Register failed:", error);
+    if (callback) {
+      callback(error, null);
+    }
   }
 }
 
