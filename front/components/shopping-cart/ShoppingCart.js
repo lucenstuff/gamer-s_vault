@@ -109,6 +109,12 @@ class ShoppingCart extends HTMLElement {
   }
 
   initiateMercadoPagoCheckout() {
+    // Disable the checkout button to prevent multiple clicks
+    const checkoutBtn = this.querySelector(".checkout-btn");
+    if (checkoutBtn) {
+      checkoutBtn.disabled = true;
+    }
+
     const orderData = {
       title: "Test",
       quantity: 1,
@@ -130,13 +136,34 @@ class ShoppingCart extends HTMLElement {
           return result.json();
         })
         .then((preference) => {
+          // Hide the checkout button after successful initiation
+          this.hideCheckoutButton();
+
+          // Create the MercadoPago checkout button
           this.createCheckoutButton(preference.id);
         })
         .catch((error) => {
           console.error(error);
+
+          // Re-enable the checkout button in case of an error
+          this.enableCheckoutButton();
         });
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  hideCheckoutButton() {
+    const checkoutBtn = this.querySelector(".checkout-btn");
+    if (checkoutBtn) {
+      checkoutBtn.style.display = "none";
+    }
+  }
+
+  enableCheckoutButton() {
+    const checkoutBtn = this.querySelector(".checkout-btn");
+    if (checkoutBtn) {
+      checkoutBtn.disabled = false;
     }
   }
 
