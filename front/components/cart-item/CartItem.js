@@ -4,6 +4,7 @@ class CartItem extends HTMLElement {
     this.name = "";
     this.price = "";
     this.image = "";
+    this.deleteButton = null;
   }
 
   connectedCallback() {
@@ -24,11 +25,30 @@ class CartItem extends HTMLElement {
         priceElement.textContent = `$${this.price}`;
         imageElement.src = this.image;
 
+        this.deleteButton = template.content.querySelector(".delete-button");
+        this.deleteButton.addEventListener("click", () => {
+          eventBus.emit("removeCartItem", this); // Emit the "removeCartItem" event with the CartItem instance as data
+        });
+
         this.appendChild(template.content.cloneNode(true));
       })
       .catch((error) => {
         console.error("Error loading cart-item template:", error);
       });
+
+    eventBus.on("removeCartItem", (cartItem) => {
+      if (cartItem === this) {
+        this.removeCartItem();
+      }
+    });
+  }
+
+  removeCartItem() {
+    console.log("Removing cart item...");
+    this.deleteButton.removeEventListener("click", () => {
+      eventBus.emit("removeCartItem", this);
+    });
+    this.remove();
   }
 }
 

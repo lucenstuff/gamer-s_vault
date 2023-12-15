@@ -20,6 +20,14 @@ class ShoppingCart extends HTMLElement {
           });
         }
 
+        // Add a click event listener to the checkout button
+        const checkoutBtn = this.querySelector(".checkout-btn");
+        if (checkoutBtn) {
+          checkoutBtn.addEventListener("click", () => {
+            this.initiateMercadoPagoCheckout();
+          });
+        }
+
         this.setupEventListeners();
       })
       .catch((error) => {
@@ -44,7 +52,6 @@ class ShoppingCart extends HTMLElement {
   addToCart(item) {
     this.cartItems.push(item);
     this.updateCartContent();
-    console.log("addToCart Event:", item);
   }
 
   removeFromCart(item) {
@@ -55,7 +62,13 @@ class ShoppingCart extends HTMLElement {
       this.cartItems.splice(index, 1);
     }
     this.updateCartContent();
-    console.log("removeFromCart Event:", item);
+
+    const cartItemElements = this.querySelectorAll("cart-item");
+    cartItemElements.forEach((cartItemElement) => {
+      if (cartItemElement.name === item.name) {
+        cartItemElement.remove();
+      }
+    });
   }
 
   updateCartContent() {
@@ -75,7 +88,6 @@ class ShoppingCart extends HTMLElement {
         ".price-container h3:last-child"
       );
 
-      // Ensure all item prices are valid numbers before summing
       const totalPrice = this.cartItems
         .map((item) => Number(item.price))
         .filter((price) => !isNaN(price))
@@ -93,6 +105,60 @@ class ShoppingCart extends HTMLElement {
     const cartPanel = this.querySelector(".cart-panel");
     if (cartPanel) {
       cartPanel.classList.toggle("active");
+    }
+  }
+
+  initiateMercadoPagoCheckout() {
+    const orderData = {
+      title: "Test",
+      quantity: 1,
+      price: 100,
+    };
+
+    try {
+      fetch("http://localhost:8080/api/create_preference", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      })
+        .then((result) => {
+          if (!result.ok) {
+            throw new Error("Failed to create preference");
+          }
+          return result.json();
+        })
+        .then((preference) => {
+          this.createCheckoutButton(preference.id);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  createCheckoutButton(preferenceId) {
+    const bricksBuilder = mp.bricks();
+
+    if (window.checkoutButton) {
+      window.checkoutButton.unmount();
+    } else {
+      const renderComponent = () => {
+        bricksBuilder.create("wallet", "wallet__container", {
+          initialization: {
+            preferenceId: preferenceId,
+          },
+          payment: {
+            callback: function (data) {
+              console.log("Payment completed:", data);
+            },
+          },
+        });
+      };
+      renderComponent();
     }
   }
 }
