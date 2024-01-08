@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Sequelize, DataTypes } from "sequelize";
@@ -11,11 +10,26 @@ dotenv.config();
 const ipAdress = "localhost";
 const app = express();
 const port = process.env.PORT || 8080;
-app.use(
-  cors({
-    origin: ["http://127.0.0.1:5500", "https://gamersvault.onrender.com"],
-  })
-);
+
+app.use(function (req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "*");
+  const allowedOrigins = [
+    "http://127.0.0.1:5500",
+    "http://gamersvault.onrender.com/",
+    "https://gamersvault.onrender.com/",
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+  next();
+});
 
 //MercadoPago
 const client = new MercadoPagoConfig({
