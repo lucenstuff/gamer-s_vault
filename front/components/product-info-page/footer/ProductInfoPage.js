@@ -1,10 +1,10 @@
-class CartBox extends HTMLElement {
+class ProductInfoPage extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
-    fetch("components/cart-box/cart-box.html")
+    fetch("components/product-info-page/footer/product-info-page.html")
       .then((response) => response.text())
       .then((content) => {
         this.innerHTML = content;
@@ -15,4 +15,4 @@ class CartBox extends HTMLElement {
   }
 }
 
-window.customElements.define("cart-box", CartBox);
+window.customElements.define("product-info-page", ProductInfoPage);

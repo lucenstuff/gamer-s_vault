@@ -1,6 +1,9 @@
+// const apiUrl = "http://localhost:8080/api";
+const apiUrl = "https://gamersvaultbackend.onrender.com/api";
+
 async function getProducts() {
   try {
-    const response = await fetch("http://localhost:8080/api/products");
+    const response = await fetch(`${apiUrl}/products`);
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -14,7 +17,7 @@ async function getProducts() {
 
 async function getSingleProducts(id) {
   try {
-    const response = await fetch("http://localhost:8080/api/products/" + id);
+    const response = await fetch(`${apiUrl}/products/${id}`);
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -35,7 +38,7 @@ async function userRegister(
   callback
 ) {
   try {
-    const response = await fetch("http://localhost:8080/api/signup", {
+    const response = await fetch(`${apiUrl}/authenticate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
