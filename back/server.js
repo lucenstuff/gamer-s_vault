@@ -12,13 +12,12 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "*");
   const allowedOrigins = [
     "http://127.0.0.1:5500",
-    "http://gamersvault.onrender.com/",
-    "https://gamersvault.onrender.com/",
+    "http://gamersvault.onrender.com",
+    "https://gamersvault.onrender.com",
   ];
-  const origin = req.headers.origin;
+  const origin = req.headers.origin.toLowerCase();
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
@@ -26,7 +25,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
-  res.header("Access-Control-Allow-credentials", true);
+  res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
   next();
 });
