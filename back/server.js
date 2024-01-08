@@ -12,7 +12,18 @@ const ipAdress = "localhost" || "0.0.0.0";
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: `http://localhost:${port}`,
+  })
+);
+
+app.use(
+  cors({
+    origin: "https://gamersvault.onrender.com/",
+  })
+);
+
 //MercadoPago
 const client = new MercadoPagoConfig({
   accessToken: process.env.ACCESS_TOKEN,
