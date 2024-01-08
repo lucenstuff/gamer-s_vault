@@ -11,8 +11,8 @@ dotenv.config();
 const ipAdress = "localhost" || "0.0.0.0";
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
 
+app.use(cors());
 //MercadoPago
 const client = new MercadoPagoConfig({
   accessToken: process.env.ACCESS_TOKEN,
