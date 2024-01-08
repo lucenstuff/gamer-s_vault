@@ -8,21 +8,20 @@ import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
 import dotenv from "dotenv";
 dotenv.config();
 
-const ipAdress = "localhost" || "0.0.0.0";
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: `http://localhost:${port}`,
+    origin: [`http://localhost:${port}`, "https://gamersvault.onrender.com"],
   })
 );
 
-app.use(
-  cors({
-    origin: "https://gamersvault.onrender.com/",
-  })
-);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  console.log("CORS Headers:", res.getHeaders());
+  next();
+});
 
 //MercadoPago
 const client = new MercadoPagoConfig({
@@ -371,6 +370,6 @@ app.post("/api/create_preference", async (req, res) => {
   }
 });
 
-app.listen(port, ipAdress, () => {
-  console.log(`Server listening on http://${ipAdress}:${port}`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
