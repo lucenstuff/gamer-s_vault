@@ -38,7 +38,7 @@ async function userRegister(
   callback
 ) {
   try {
-    const response = await fetch(`${apiUrl}/authenticate`, {
+    const response = await fetch(`${apiUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ async function userRegister(
 
 async function authenticateUser(email, password) {
   try {
-    const response = await fetch("http://localhost:8080/api/authenticate", {
+    const response = await fetch("${apiUrl}/authenticate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
