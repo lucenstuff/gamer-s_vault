@@ -11,9 +11,12 @@ dotenv.config();
 const ipAdress = "localhost" || "0.0.0.0";
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
-app.options("*", cors());
+const allowedOrigin =
+  process.env.NODE_ENV === "production"
+    ? "https://gamersvault.onrender.com"
+    : "http://localhost:your_local_port";
 
+app.use(cors({ origin: allowedOrigin }));
 //MercadoPago
 const client = new MercadoPagoConfig({
   accessToken: process.env.ACCESS_TOKEN,
