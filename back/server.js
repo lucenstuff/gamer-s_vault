@@ -12,6 +12,7 @@ const ipAdress = "localhost" || "0.0.0.0";
 const app = express();
 const port = process.env.PORT;
 app.use(cors());
+app.options("*", cors());
 
 //MercadoPago
 const client = new MercadoPagoConfig({
