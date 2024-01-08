@@ -1,11 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { Sequelize, DataTypes } = require("sequelize");
-const bodyParser = require("body-parser");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { Sequelize, DataTypes } from "sequelize";
+import bodyParser from "body-parser";
+import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
+import dotenv from "dotenv";
+dotenv.config();
 
+const ipAdress = "localhost";
 const app = express();
 const port = process.env.PORT || 8080;
 app.use(
@@ -14,27 +17,47 @@ app.use(
   })
 );
 
-// Middleware
+//MercadoPago
+const client = new MercadoPagoConfig({
+  accessToken: process.env.ACCESS_TOKEN,
+  options: { timeout: 5000, idempotencyKey: "abc" },
+});
+
+// Step 3: Initialize the API object
+const payment = new Payment(client);
+
+// Step 4: Create the request object
+const body = {
+  transaction_amount: 12.34,
+  description: "<DESCRIPTION>",
+  payment_method_id: "<PAYMENT_METHOD_ID>",
+  payer: {
+    email: "<EMAIL>",
+  },
+};
+
+// Step 5: Make the request
+payment.create({ body }).then(console.log).catch(console.log);
+
+//Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize(
-  process.env.DB_DATABASE,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: "mysql",
-    dialectOptions: {
-      ssl: {
-        rejectUnauthorized: true,
-      },
+const sequelize = new Sequelize({
+  dialect: "mysql",
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: true,
     },
-    define: {
-      timestamps: false,
-    },
-  }
-);
+  },
+  logging: false,
+  // other options as needed
+});
 
 const User = sequelize.define(
   "Users",
@@ -315,6 +338,32 @@ app.get("/api/getcart/:userId", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+app.post("/api/create_preference", async (req, res) => {
+  try {
+    const body = {
+      items: [
+        {
+          title: req.body.title,
+          quantity: Number(req.body.quantity),
+          unit_price: Number(req.body.price),
+          currency_id: "ARS",
+        },
+      ],
+      back_urls: {
+        success: "https://lucenstuff.github.io/gamer-s_vault/",
+        failure: "https://lucenstuff.github.io/gamer-s_vault/",
+        pending: "https://lucenstuff.github.io/gamer-s_vault/",
+      },
+      auto_return: "approved",
+    };
+    const preference = new Preference(client);
+    const result = await preference.create({ body });
+    res.json({ id: result.id });
+  } catch {
+    res.status(500).json({ error: "Failed to create preference" });
+  }
+});
+
+app.listen(port, ipAdress, () => {
+  console.log(`Server listening on http://${ipAdress}:${port}`);
 });
