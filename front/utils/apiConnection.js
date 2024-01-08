@@ -1,4 +1,5 @@
-const apiUrl = "http://localhost:8080/api";
+// const apiUrl = "http://localhost:8080/api";
+const apiUrl = "https://gamersvaultbackend.onrender.com/api";
 
 async function getProducts() {
   try {
